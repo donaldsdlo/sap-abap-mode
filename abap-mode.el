@@ -36,7 +36,8 @@
 
 ;; define keywords
 ;; ABAP keywords
-;; Refer to https://help.sap.com/doc/abapdocu_751_index_htm/7.51/en-US/abenabap_statements_overview.htm
+;; Refer to the ABAP Keyword Documentation (latest, ABAP for Cloud Development):
+;; https://help.sap.com/docs/abap-cloud/abap-keyword/abap-keyword-documentation?locale=en-US
 (require 'abap-indention)
 (defvar abap-mode-hook nil)
 
@@ -368,6 +369,17 @@
         "TYPE TABLE FOR" "TYPE TABLE FOR CREATE" "TYPE TABLE FOR CHANGE"
         "MAPPING FROM ENTITY"
 
+        ;; Modern ABAP Expressions (7.5x, per current ABAP Keyword Documentation)
+        ;;; Table Expressions / Constructor Operators
+        "REDUCE"
+        "FILTER"
+        "LINES OF"
+        "FOR"
+        "STEP"
+        "EXACT"
+        "RAISE SHORTDUMP"
+        "SHORTDUMP"
+
         ;; Not Listed in Previous Section, But Somehow is Keyword
         ;; TODO Should be assembled in a regular expression form
         "FIELD-SYMBOL"
@@ -398,7 +410,7 @@
 ;; we don't need this here as case-insensitivity is treated below (define-derived-mode)
 ;; (setq abap-keywords (append abap-keywords-open abap-keywords-close abap-keywords))
 
-(setq abap-types    '("C" "I" "F" "STRING" "X" "XSTRING" "N" "P" "ABAP_BOOL" "DECFLOAT16" "DECFLOAT34") )
+(setq abap-types    '("C" "I" "F" "STRING" "X" "XSTRING" "N" "P" "ABAP_BOOL" "DECFLOAT16" "DECFLOAT34" "INT8" "UTCLONG" "DATN" "TIMN") )
 (setq abap-constants '("SPACE" "ABAP_FALSE" "ABAP_TRUE"))
 (setq abap-events    '("INITIALIZATION" "START-OF-SELECTION" "AT SELECTION-SCREEN" "END-OF-SELECTION" "VERIFICATION-MESSAGE"))
 (setq abap-functions '("STRLEN" "CONCATENATE" "CONDENSE" "SPLIT" "SUBSTRING" ))

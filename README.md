@@ -8,17 +8,53 @@ ABAP development files and CDS views.
 
 ## Installation
 
-Add this repository to your `load-path`:
-```cl
-(add-to-list 'load-path "path/to/sap-abap-mode")
-(require 'abap-mode)
-(add-to-list 'auto-mode-alist '("\\.abap\\'" . abap-mode))
-;; ABAP CDS Mode
-(require 'abap-cds-mode)
-(add-to-list 'auto-mode-alist '("\\.cds\\'" . abap-cds-mode))
-;; ADT files as well
-(add-to-list 'auto-mode-alist '("\\.\\(asprog\\|asinc\\|aclass\\)\\'" . abap-mode))
-(add-to-list 'auto-mode-alist '("\\.asddls\\'" . abap-cds-mode))
+This package is managed with [straight.el](https://github.com/radian-software/straight.el)
+and [use-package](https://github.com/jwiegley/use-package); both are assumed to be already
+installed and configured.
+
+Register the local checkout as a straight package (the directory must be a git repository),
+then declare each major mode with `use-package`. Because straight already builds the package,
+the per-mode blocks use `:straight nil` so use-package only loads them:
+
+```elisp
+;; 1. Point straight at your local checkout (requires a git repo)
+(straight-use-package
+ '(abap-mode :local-repo "path/to/sap-abap-mode" :type git))
+
+;; 2. Declare the modes; straight already built the package, so :straight nil
+(use-package abap-mode
+  :straight nil
+  :mode (("\\.abap\\'" . abap-mode)
+         ("\\.\\(asprog\\|asinc\\|aclass\\)\\'" . abap-mode)))
+
+(use-package abap-cds-mode
+  :straight nil
+  :mode (("\\.cds\\'" . abap-cds-mode)
+         ("\\.asddls\\'" . abap-cds-mode)))
 ```
+
+If you prefer to let straight pull from the upstream repository instead of a local checkout,
+replace the `straight-use-package` form with a `:straight` recipe on the mode declaration,
+for example:
+
+```elisp
+(use-package abap-mode
+  :straight (:host github :repo "qianmarv/sap-abap-mode")
+  :mode (("\\.abap\\'" . abap-mode)
+         ("\\.\\(asprog\\|asinc\\|aclass\\)\\'" . abap-mode)))
+```
+
+## Change Log
+
+### 2026-10-08
+- **Indentation default is now 4 spaces.** `abap-indent-level`, `abap-cds-indent-level`,
+  and `abap-ddic-indent-level` changed from `2` to `4`.
+- **Documentation reference updated.** The keyword list in `abap-mode.el` now points to the
+  current ABAP Keyword Documentation (ABAP for Cloud Development, latest 7.58) instead of the
+  stale 7.51 static page.
+- **Modern ABAP (7.5x) keywords added.** `abap-mode.el` now highlights `REDUCE`, `FILTER`,
+  `LINES OF`, `FOR`, `STEP`, `EXACT`, `RAISE SHORTDUMP`, and `SHORTDUMP`; the built-in type
+  list gained `INT8`, `UTCLONG`, `DATN`, and `TIMN`.
+- **Installation docs converted** to `use-package` + `straight.el` format.
 
 <a name="footnote1">1</a>: the indentation rules only cover basic statements

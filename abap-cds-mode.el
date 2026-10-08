@@ -25,7 +25,7 @@
 
 (defvar abap-cds-mode-hook nil)
 
-(defcustom abap-cds-indent-level 2
+(defcustom abap-cds-indent-level 4
   "Indentation of ABAP CDS with respect to current scope."
   :type 'integer)
 

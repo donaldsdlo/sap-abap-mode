@@ -26,7 +26,7 @@
 
 ;;; Code:
 
-(defcustom abap-indent-level 2
+(defcustom abap-indent-level 4
   "Indentation of ABAP statements with respect to containing block."
   :type 'integer)
 

@@ -25,7 +25,7 @@
 
 (defvar abap-ddic-mode-hook nil)
 
-(defcustom abap-ddic-indent-level 2
+(defcustom abap-ddic-indent-level 4
   "Indentation of ABAP DDIC with respect to current scop."
   :type 'integer)
 
